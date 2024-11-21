@@ -1,0 +1,128 @@
+﻿@model ListViewModel
+@{
+    Layout = null;
+    var date = DateTime.Now;
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Coinnect.styles.css" asp-append-version="true" />
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+        }
+
+        .report-date {
+            font-size: 14px;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0a73e6;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/coinnectlogo.png" alt="Coinnect Logo" />
+        </div>
+        <div class="report-date">
+            <p>Date: @date.ToString("dd MMM yyyy")</p>
+        </div>
+    </div>
+    <h2>Transaction details</h2>
+    <div class="container">
+        @if (Model.Transactions.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Payment</th>
+                        <th>Deposit</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.TransactionDate.ToString("dd MMM yyyy")</td>
+                            <td>@transaction.Description</td>
+                            @if (transaction.TransactionType == "Debit")
+                            {
+                                <td class="text text-danger">-@transaction.Amount</td>
+                                <td class="text-green"> </td>
+                            }
+                            else
+                            {
+                                <td class="text text-danger"> </td>
+                                <td class="text text-success">+@transaction.Amount</td>
+                            }
+
+                            <td>R @transaction.Balance</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No transactions have been made yet.</p>
+        }
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Other specific scripts for this view -->
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@model ListViewModel
+
+@{
+    ViewData["Title"] = "View All Advice";
+}
+
+<h2>All Advice Given</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Client Name</th>
+            <th>Advisor Name</th>
+            <th>Advice</th>
+            <th>Date Given</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var advice in Model.Advices)
+        {
+            <tr>
+                <td>@advice.Client.FirstName</td>
+                <td>@advice.Advisor.FirstName</td>
+                <td>@advice.AdviceText</td>
+                <td>@advice.DateGiven.ToString("dd MMM yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

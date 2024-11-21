@@ -1,0 +1,55 @@
+﻿@model ListViewModel
+@{
+    @* Add Title *@
+    ViewData["Title"] = "History";
+}
+
+<h2 class="text-center">User History</h2>
+@if (User.IsInRole("Advisor"))
+{
+    <a asp-action="GiveAdvice" asp-controller="Advisor" asp-route-id="@Model.theUser.Id" class="btn btn-outline-primary">Give Advice</a>
+}
+
+@if (Model.Transactions.Any() )
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Payment</th>
+                <th>Deposit</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionDate.ToString("dd MMM yyyy")</td>
+                    <td>@transaction.Description</td>
+                    @if (transaction.TransactionType == "Debit")
+                    {
+                        <td class="text text-danger">-@transaction.Amount</td>
+                        <td class="text-green"> </td>
+                    }
+                    else
+                    {
+                        <td class="text text-danger"> </td>
+                        <td class="text text-success">+@transaction.Amount</td>
+                    }
+
+                    <td>@transaction.Balance</td>
+
+                </tr>    
+                
+
+            }
+        </tbody>
+    </table>
+    
+}
+else
+{
+    <p>No transactions have been made yet.</p>
+}

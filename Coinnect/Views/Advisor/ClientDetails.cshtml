@@ -1,0 +1,35 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Details page";
+}
+
+<h2>User Details </h2>
+
+<div>
+    <hr />
+    <div class="fw-bold">@Model.FirstName @Model.LastName</div>
+    <hr />
+
+    <p>
+        <span class="fw-bold">
+            @Html.DisplayNameFor(model => model.Email)
+        </span>: @Model.Email
+    </p>
+    <p>
+        <span class="fw-bold">
+            @Html.DisplayNameFor(model => model.Id)
+        </span> : @Model.Id
+    </p>
+
+    <p>
+        <span class="fw-bold">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </span> : @Model.DateOfBirth
+    </p>
+    <p>
+        <span class="fw-bold">
+            @Html.DisplayNameFor(model => model.Identifier)
+        </span> : @Model.Identifier
+    </p>
+    <a asp-action="UsersAccounts" asp-controller="Admin" asp-route-id="@Model.Id" class="btn btn-warning">Users Accounts</a>
+</div>

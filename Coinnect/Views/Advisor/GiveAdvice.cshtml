@@ -1,0 +1,18 @@
+﻿@model AdviceViewModel
+
+@{
+    ViewData["Title"] = "Give Advice";
+}
+
+<h2>Give Advice to Client</h2>
+
+<form asp-action="GiveAdvice">
+    <input type="hidden" asp-for="ClientId" />
+    
+    <div class="form-group">
+        <label asp-for="AdviceText"></label>
+        <textarea asp-for="AdviceText" class="form-control"></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit Advice</button>
+</form>

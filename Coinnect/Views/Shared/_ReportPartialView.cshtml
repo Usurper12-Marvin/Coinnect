@@ -1,0 +1,21 @@
+﻿<table class="table table-bordered report-table">
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Target User</th>
+            <th>Date</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model)
+        {
+            <tr>
+                <td>@log.ActionPerformed</td>
+                <td>@log.TargetUserId</td>
+                <td>@log.ActionDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="details-col">@log.Details</td>
+            </tr>
+        }
+    </tbody>
+</table>

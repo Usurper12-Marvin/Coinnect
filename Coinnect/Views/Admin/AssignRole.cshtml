@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AssignRole>
+@{
+    ViewBag.Title = "Assign Role to Users - Coinnect";
+}
+<style>
+    .Assignbody {
+        background-color: #f8f9fa;
+    }
+
+    h2 {
+        color: #007bff; /* Matches Coinnect's logo blue */
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .badge {
+        font-size: 1rem;
+    }
+
+    .form-control {
+        width: 50%;
+        border-radius: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff; 
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-outline-danger {
+        border-radius: 20px;
+        padding: 10px 20px;
+    }
+</style>
+@if (TempData["message"] != null)
+{
+    <div id="alertContainer" class="alert alert-dismissible alert-success" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <span id="alertMessage">@TempData["message"]</span>
+    </div>
+} 
+<div class="Assignbody my-5">
+    <h2 class="text-center mb-5">Assign Role to Users</h2>
+    <div class="row">
+        @foreach (var user in Model) 
+        {
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>@user.Email</strong></h5>
+                        <p class="card-text">Current Role: <span class="badge bg-secondary">@string.Join(", ", user.Roles)</span></p>
+                        <form asp-action="AssignRole" method="post">
+                            <div class="d-flex align-items-center">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <select name="role" class="form-control me-2 rounded-input">
+                                    <option value="Consultant">Consultant</option>
+                                    <option value="Advisor">Advisor</option>
+                                    <option value="Client">Client</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Assign Role</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        }
+    </div>
+    
+</div>
+

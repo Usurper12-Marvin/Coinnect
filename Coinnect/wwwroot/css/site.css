@@ -1,0 +1,91 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100vh;
+    bottom: 0;
+}
+
+
+
+body {
+    background: linear-gradient(135deg, #f0f2f5, #e6ebf1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+
+h1 {
+    font-size: 3rem;
+}
+
+p.lead {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1rem;
+}
+
+
+.navbar {
+    
+    background: linear-gradient(to left, #0F9BDC, white);
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+    .navbar img {
+        height: 60px;
+        vertical-align: middle;
+        
+    }
+
+    .navbar h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+.menu-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.main-content {
+    margin-top: 70px;  
+    padding: 20px;
+    text-align: center;
+}
+
+.btn-container {
+    padding-top: 50px;
+}
+.navbar a:hover {
+    text-decoration: underline;
+    text-decoration-color: #000000;
+}

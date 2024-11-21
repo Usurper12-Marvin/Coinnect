@@ -1,0 +1,35 @@
+﻿@model ListViewModel
+
+<h2>Make a transaction</h2>
+
+<form asp-action="Transact" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="transfer.fromAccount">From Account: </label>
+        <select asp-for="transfer.fromAccount" class="form-control">
+            @foreach (var item in Model.Accounts)
+            {
+                <option>@item.AccountNumber</option>
+            }
+        </select>
+        <span asp-validation-for="transfer.fromAccount" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group mb-3">
+        <label asp-for="transfer.toAccount">To Account: </label>
+        <select asp-for="transfer.toAccount" class="form-control">
+            @foreach (var item in Model.Accounts)
+            {
+                <option>@item.AccountNumber</option>
+            }
+        </select>
+        <span asp-validation-for="transfer.toAccount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="transfer.Amount">Amount</label>
+        <input asp-for="transfer.Amount" class="form-control" type="number" min="0" />
+        <span asp-validation-for="transfer.Amount" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

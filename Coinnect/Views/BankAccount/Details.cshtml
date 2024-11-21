@@ -1,0 +1,99 @@
+﻿@model BankAccount
+@{
+    ViewData["Title"] = "Account Details";
+}
+<style>
+    
+
+    /* Font styling for the entire view */
+    .Details-body, .Details-h1, .Details-p {
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+    }
+
+    /* Styling for the Bank Account Details section */
+    .account-details-container {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 800px;
+        margin: 40px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-top: 6px solid #d0011b;
+    }
+
+    /* Header styling */
+    .Details-h1 {
+        font-size: 2.5rem;
+        color: #376ed3;
+        margin-bottom: 20px;
+    }
+
+    /* Key account details */
+    .account-details-container p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+        .account-details-container p span {
+            font-weight: bold;
+            color: #d0011b;
+        }
+
+    /* Account number */
+    .account-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    /* Account type and balance */
+    .account-type, .account-balance {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+        /* Subtle text emphasis */
+        .account-type span, .account-balance span {
+            color: #d0011b;
+            font-weight: bold;
+        }
+
+    /* Add a gradient underline under the heading */
+    .Details-h1:after {
+        content: '';
+        display: block;
+        width: 100px;
+        margin: 10px 0;
+        border: 3px solid;
+        background: linear-gradient(90deg, #d0011b, #376ed3);
+    }
+
+    /* Hover effect for links */
+    a {
+        color: #376ed3;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #d0011b;
+            text-decoration: underline;
+        }
+
+</style>
+<div class="account-details-container">
+    <h1 class="Details-h1">Bank Account Details</h1>
+
+    <div class="account-number">
+        @Model.AccountNumber
+    </div>
+
+    <p class="account-type Details-p">
+        <span>Account Type:</span> @Model.AccountType
+    </p>
+
+    <p class="account-balance Details-p">
+        <span>Balance:</span>R @Model.Balance.ToString("0.00")
+    </p>
+</div>

@@ -1,0 +1,80 @@
+﻿@model RatingViewModel
+
+
+@{
+    ViewBag.Title = "About Us"; // Inherit main layout if applicable.
+}
+
+<div class="container about-page">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <img src="~/images/CoinnectLogo.png" alt="Coinnect Logo" class="about-logo"/>
+            <h1 class="mt-4">About Coinnect</h1>
+            <p class="lead">A seamless platform for transactions between your accounts.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h2>Our Mission</h2>
+            <p>Coinnect strives to make banking easier for students and staff of the University of the Free State by providing a seamless platform for managing multiple accounts and performing transactions quickly and securely.</p>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Our Vision</h2>
+            <p>Our vision is to empower users with financial independence and make banking simple, fast, and reliable.</p>
+        </div> 
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12 text-center">
+            <img src="~/images/ufslogo.jpeg" style="max-width: 300px;" />
+        </div>
+        <div class="col-md-12 text-center">
+            <h2>Why Choose Coinnect?</h2>
+            <ul class="list-unstyled">
+                <li><span class="fas fa-check"></span> Secure and Fast Transactions</li>
+                <li><i class="fa fa-check"></i> Manage up to 4 Accounts</li>
+                <li><i class="fa fa-check"></i> Consultants and Financial Advisors at Your Service</li>
+                <li><i class="fa fa-check"></i> Real-time Notifications and Reports</li>
+            </ul>
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+    {
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <h2>Review</h2>
+                <p>Please send us a review, it will greatly help us improve!</p>
+                <form asp-action="About" method="post">
+                    <div class="form-group mb-3">
+                        <label asp-for="Rating"></label>
+                        <input asp-for="Rating" class="form-control" type="number" min="1" max="5" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Review"></label>
+                        <textarea asp-for="Review" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-3">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .about-page {
+        color: #333;
+    }
+    .about-logo {
+        width: 150px;
+    }
+    h1, h2 {
+        color: #1e73be; /* Match the blue in your logo */
+    }
+    .fa-check {
+        color: #1e73be;
+    }
+</style>

@@ -1,0 +1,23 @@
+﻿@model CreateAccount
+
+<h2>Create Account</h2>
+
+<form asp-action="CreateAccount" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="AccountType">Account Type</label>
+        <select asp-for="AccountType" class="form-control">
+            <option value="Savings">Savings</option>
+            <option value="Cheque">Cheque</option>
+            <!-- Add other account types as necessary -->
+        </select>
+        <span asp-validation-for="AccountType" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="InitialDeposit">Initial Deposit</label>
+        <input asp-for="InitialDeposit" class="form-control" type="number" min="0" />
+        <span asp-validation-for="InitialDeposit" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-3">Create Account</button>
+</form>

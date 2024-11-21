@@ -1,0 +1,101 @@
+﻿@model ContactUsViewModel
+
+<style>
+    /* Custom styling for Coinnect theme */
+    .contact_body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .contact-section {
+        background-color: #ffffff;
+        padding: 60px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .contact-section h2 {
+            color: #333333;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .contact-section .form-control {
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+    .btn-contact {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-contact:hover {
+            background-color: #218838;
+        }
+
+    .contact-details {
+        font-size: 14px;
+        color: #555555;
+        margin-top: 30px;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .logo img {
+            width: 200px;
+        }
+</style>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="alertContainer" class="alert alert-dismissible alert-success" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <span id="alertMessage">@TempData["SuccessMessage"]</span>
+    </div>
+}
+<div class="contact_body">
+    <div class="container mt-5">
+        <div class="logo">
+            <img src="~/images/coinnectlogo.png" alt="Coinnect Logo" />
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="contact-section">
+                    <h2>Contact Us</h2>
+
+                    <form asp-action="SubmitMessage" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-contact">Submit</button>
+                    </form>
+
+                    
+                    <div class="contact-details">
+                        <p>Email: support@coinnect.com</p>
+                        <p>Phone: +27 67 153 0088</p>
+                        <p>Address: Kestell Road, Phuthaditjhaba, 9866</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model ListViewModel
+
+@if (Model.Reviews.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rating in Model.Reviews)
+            {
+                <tr>
+                    <td>@rating.Client.UserName</td>
+                    <td>@rating.Rating</td>
+                    <td>@rating.ReviewText</td>
+                    <td>@rating.DatePosted.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No reviews have been made yet.</p>
+}

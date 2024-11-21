@@ -1,0 +1,38 @@
+﻿@* Add Generic collection *@
+@model ListViewModel
+@{
+    @* Add Title *@
+    ViewData["Title"] = "Account List";
+
+}
+
+<h2 class="text-center">List of Users accounts</h2>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model.Accounts)
+        {
+            <tr>
+                <td>@account.AccountNumber</td>
+                <td>@account.AccountType</td>
+                <td>@account.Balance</td>
+                <td>
+                    <a asp-action="Details" asp-controller="BankAccount"
+                       class="btn btn-info" asp-route-id="@account.AccountId">Details</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@* <a asp-action="History" asp-controller="Transaction"
+   class="btn btn-info" asp-route-id="@account.Identity">History</a> *@

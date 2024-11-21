@@ -1,0 +1,105 @@
+﻿@model ListViewModel
+@{
+    Layout = null;
+    var date = DateTime.Now;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report</title>
+    <link rel="stylesheet" asp-href-include="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" asp-href-include="~/css/site.css" />
+    <link rel="stylesheet" asp-href-include="~/Coinnect.styles.css" />
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+        }
+
+        .report-date {
+            font-size: 14px;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0a73e6;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+    <body>
+        <div class="header">
+            <div class="logo">
+                <img src="~/images/coinnectlogo.png" alt="Coinnect Logo"/>
+            </div>
+            <div class="report-date">
+                <p>Date & Time: @date.ToString("dd MMM yyyy HH:mm")</p>
+            </div>
+        </div>
+        <div class="container">
+            @if (User.IsInRole("Consultant"))
+            {
+                <h2 class="report-header">Your Report(s)</h2>
+            }
+            else
+            {
+                <h2 class="report-header">Consultant's Report(s)</h2>
+            }
+
+            @if (Model.Actions.Any())
+            {
+                <partial name="_ReportPartialView" model="@Model.Actions" />
+            }
+            else
+            {
+                <p>No actions were taken.</p>
+            }
+        
+        </div>
+
+        <script asp-src-include="~/lib/jquery/dist/jquery.min.js"></script>
+            <script asp-src-include="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script asp-src-include="~/js/site.js" ></script>
+            <!-- Other specific scripts for this view -->
+    </body>
+</html>

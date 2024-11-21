@@ -1,0 +1,76 @@
+﻿@model UserViewModels.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+<style>
+    body 
+    {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #000, #FF0000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .register-container 
+    {
+        background-color: #fff;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 30px;
+        width: 350px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .register-container img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .register-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0F9BDC;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .register-container button:hover {
+                background-color: #0D6BAE;
+            }
+</style>
+
+<body>
+    
+    <div class="register-container">
+        <img src="~/images/coinnectlogo.png" />
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <form asp-action="Register" method="post">
+            <partial name="_CreateRegisterUserPartialView" model="@Model" />
+
+            <button class="btn btn-primary mb-3" type="submit">Register</button>
+        </form>
+    </div>
+</body>

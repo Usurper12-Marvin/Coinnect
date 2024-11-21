@@ -1,0 +1,77 @@
+﻿@model ListViewModel
+@{
+    ViewData["Title"] = "My Account";
+}
+<style>
+    .table th {
+        font-weight: bold;
+    }
+
+    .btn-info {
+        background-color: #00c4ff;
+        border: none;
+    }
+
+    .btn-outline-primary, .btn-outline-secondary {
+        margin-right: 10px;
+    }
+</style>
+@if (TempData["message"] != null)
+{
+    <div id="alertContainer" class="alert alert-dismissible alert-success" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <span id="alertMessage">@TempData["message"]</span>
+    </div>
+}
+@if (TempData["error"] != null)
+{
+    <div id="alertContainer" class="alert alert-dismissible alert-danger" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <span id="alertMessage">@TempData["error"]</span>
+    </div>
+}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a asp-action="CreateAccount" asp-controller="BankAccount" asp-route-id="@User.Identity" class="btn btn-outline-primary">Create Account</a>
+        @if (Model.Accounts.Any())
+        {
+            <a asp-action="History" asp-controller="Transaction" asp-route-id="@User.Identity" class="btn btn-outline-secondary">Check history</a>
+        }
+    </div>
+    @if (Model.Accounts.Any())
+    {
+        <h2>Your Accounts</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model.Accounts)
+                {
+                    <tr>
+                        <td>@account.AccountNumber</td>
+                        <td>@account.AccountType</td>
+                        <td>R @account.Balance</td>
+                        <td>
+                            <a asp-action="Details" asp-controller="BankAccount"
+                               class="btn btn-info" asp-route-id="@account.AccountId">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-start mt-4">
+            <a asp-controller="Transaction" asp-action="Transact" class="btn btn-primary me-2">Make a transaction</a>
+            <a asp-controller="Transaction" asp-action="Deposit" class="btn btn-success">Make a deposit</a>
+        </div>
+        <hr />
+    }
+    else
+    {
+        <p>You do not have any accounts yet.</p>
+    }
+</div>

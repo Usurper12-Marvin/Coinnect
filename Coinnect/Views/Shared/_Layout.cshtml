@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Coinnect</title>
+    <link rel="stylesheet" asp-href-include="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" asp-href-include="~/css/site.css" />
+    <link rel="stylesheet" asp-href-include="~/Coinnect.styles.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 " style="background: linear-gradient(90deg, #FF0000, #007bff);">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/coinnectlogo.png" alt="Coinnect Logo"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item m-0">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Client" asp-action="About">About</a>
+                    </li>
+                    @if (!User.Identity.IsAuthenticated || User.IsInRole("Client"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="MessagesList">Messages</a>
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
+                        </li>
+                        if (User.IsInRole("Advisor"))
+                        {
+                            <li class="nav-item">
+                                <a asp-action="ClientList" asp-controller="Advisor" class="nav-link text-white">Clients</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Admin") || User.IsInRole("Consultant"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light"
+                               asp-action="UserList" asp-controller="Admin">User List</a>
+                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light"
+                                   asp-action="AssignRole" asp-controller="Admin">Assign Role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light"
+                                       asp-action="ViewAllAdvice" asp-controller="Admin">Orders</a>
+                                </li>
+                                
+                            }
+                            @if (User.IsInRole("Consultant"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light"
+                                       asp-action="ViewRatingsReviews" asp-controller="Client">Reviews</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="MyAccount">My Account</a>
+                            </li>
+                        }
+                        
+                    }
+
+                </ul>
+            </div>
+            <ul class="navbar-nav navbar-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-link text-white">Hello, @User.Identity.Name</li>
+                    <li class="nav-item">
+                        <form asp-action="Logout" asp-controller="Account" method="post">
+
+                            <button class="btn btn-link nav-link text-light" type="submit">Log Out</button>
+
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-light"
+                           asp-action="Register" asp-controller="Account">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light"
+                           asp-action="Login" asp-controller="Account">Login</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    </nav>
+
+    <div class="container">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div>
+        <br />
+        <div class="footer text-uppercase mt-auto" style="background: linear-gradient(90deg, #FF0000, #007bff); color: white; text-align: center;">
+            <div>
+                &copy; 2024 Coinnect
+                - All rights reserved
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <script asp-src-include="~/lib/jquery/dist/jquery.min.js"></script>
+    <script asp-src-include="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script asp-src-include="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

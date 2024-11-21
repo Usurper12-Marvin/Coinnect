@@ -1,0 +1,13 @@
+﻿@model ListViewModel
+
+<h2>Your Report</h2>
+@if(Model.Actions.Any())
+{
+    <partial name="_ReportPartialView" model="@Model.Actions" />
+
+    <a asp-action="GenerateReport" class="btn btn-primary">Download PDF</a>
+}
+else
+{
+    <p>No action has been recorded.</p>
+}
